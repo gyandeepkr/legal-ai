@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const authMiddleware = require('../middleware/auth');
-const { getDb, saveDb } = require('../db/database');
+
 
 const router = express.Router();
 
@@ -79,14 +79,7 @@ router.post('/', authMiddleware, upload.single('document'), async (req, res) => 
 
     const analysis = await analyzeWithGemini(text, options);
 
-    const db = await getDb();
-    db.run(
-      `INSERT INTO documents (user_id, filename, file_size, summary, risks, dates, clauses) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [req.user.id, req.file.originalname, req.file.size, analysis.summary,
-       JSON.stringify(analysis.risks), JSON.stringify(analysis.dates), JSON.stringify(analysis.clauses)]
-    );
-    saveDb();
-
+   // analysis saved in-memory only on Vercel
     res.json({ success: true, ...analysis });
   } catch (err) {
     console.error('Analysis error:', err.message);
