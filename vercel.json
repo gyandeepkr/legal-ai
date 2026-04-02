@@ -11,7 +11,28 @@
     }
   ],
   "routes": [
-    { "src": "/legalai-connected.html", "dest": "/legalai-connected.html" },
-    { "src": "/(.*)", "dest": "index.js" }
+    {
+      "src": "/legalai-connected.html",
+      "dest": "/legalai-connected.html"
+    },
+    {
+      "src": "/auth/(.*)",
+      "dest": "/index.js",
+      "methods": ["GET", "POST", "OPTIONS"]
+    },
+    {
+      "src": "/analyze",
+      "dest": "/index.js",
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "src": "/contact",
+      "dest": "/index.js",
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "src": "/health",
+      "dest": "/index.js"
+    }
   ]
 }
