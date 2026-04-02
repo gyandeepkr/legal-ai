@@ -4,12 +4,14 @@
     {
       "src": "index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "legalai-connected.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "index.js"
-    }
+    { "src": "/legalai-connected.html", "dest": "/legalai-connected.html" },
+    { "src": "/(.*)", "dest": "index.js" }
   ]
 }
